@@ -1,0 +1,14 @@
+C:\Users\C\source\repos\NotificationCentre\NotificationHub\bin\Debug\netcoreapp2.2\NotificationHub.deps.json
+C:\Users\C\source\repos\NotificationCentre\NotificationHub\bin\Debug\netcoreapp2.2\NotificationHub.runtimeconfig.json
+C:\Users\C\source\repos\NotificationCentre\NotificationHub\bin\Debug\netcoreapp2.2\NotificationHub.runtimeconfig.dev.json
+C:\Users\C\source\repos\NotificationCentre\NotificationHub\bin\Debug\netcoreapp2.2\NotificationHub.dll
+C:\Users\C\source\repos\NotificationCentre\NotificationHub\bin\Debug\netcoreapp2.2\NotificationHub.pdb
+C:\Users\C\source\repos\NotificationCentre\NotificationHub\obj\Debug\netcoreapp2.2\NotificationHub.csprojAssemblyReference.cache
+C:\Users\C\source\repos\NotificationCentre\NotificationHub\obj\Debug\netcoreapp2.2\NotificationHub.csproj.CoreCompileInputs.cache
+C:\Users\C\source\repos\NotificationCentre\NotificationHub\obj\Debug\netcoreapp2.2\NotificationHub.RazorAssemblyInfo.cache
+C:\Users\C\source\repos\NotificationCentre\NotificationHub\obj\Debug\netcoreapp2.2\NotificationHub.RazorAssemblyInfo.cs
+C:\Users\C\source\repos\NotificationCentre\NotificationHub\obj\Debug\netcoreapp2.2\NotificationHub.AssemblyInfoInputs.cache
+C:\Users\C\source\repos\NotificationCentre\NotificationHub\obj\Debug\netcoreapp2.2\NotificationHub.AssemblyInfo.cs
+C:\Users\C\source\repos\NotificationCentre\NotificationHub\obj\Debug\netcoreapp2.2\NotificationHub.RazorTargetAssemblyInfo.cache
+C:\Users\C\source\repos\NotificationCentre\NotificationHub\obj\Debug\netcoreapp2.2\NotificationHub.dll
+C:\Users\C\source\repos\NotificationCentre\NotificationHub\obj\Debug\netcoreapp2.2\NotificationHub.pdb
