@@ -23,9 +23,9 @@ namespace NotificationHub.Controllers
             if (registerdDevices.Count == 0)
             {
 
-                registerdDevices.Add(new Device(1, 1, "phone"));
-                registerdDevices.Add(new Device(2, 1, "mac"));
-                registerdDevices.Add(new Device(8, 2, "kindle"));
+                registerdDevices.Add(new Device(1, "phone"));
+                registerdDevices.Add(new Device(1, "mac"));
+                registerdDevices.Add(new Device(2, "kindle"));
             }
             return registerdDevices;
         }
@@ -39,9 +39,10 @@ namespace NotificationHub.Controllers
             if (groups.Count == 0)
             {
 
-                groups.Add(new Group(1, "mobiles", new List<Device>()));
-                groups.Add(new Group(2, "computers", new List<Device>()));
-                groups.Add(new Group(8, "readers", new List<Device>()));
+                groups.Add(new Group(1, "mobiles", new List<int>()));
+                groups.Add(new Group(2, "computers", new List<int>()));
+                groups.Add(new Group(8, "readers", new List<int>())); 
+            
             }
             return groups;
         }
@@ -75,24 +76,25 @@ namespace NotificationHub.Controllers
         [HttpPost]
         public void Post([FromBody] Device device)
         {
-            int flg1 = 0;
+            // int flg1 = 0;
 
-            foreach (Device d in registerdDevices)
-            {
-                if (d.DeviceId == device.DeviceId)
-                {
-                    flg1 = 1;
-                    break;
-                   
-                }         
-            }
+            /* foreach (Device d in registerdDevices)
+             {
+                 if (d.DeviceId == device.DeviceId)
+                 {
+                     flg1 = 1;
+                     break;
 
+                 }         
+             } */
+
+            Device dev = new Device(device.GroupId, device.DeviceName);
             foreach (Group g in groups)
             {
-                if ((device.GroupId == g.GroupId) && flg1 == 0)  //nema nijedan device sa tim id-em i postoji ta grupa
+                if (device.GroupId == g.GroupId)  //nema nijedan device sa tim id-em i postoji ta grupa
                 {
-                    registerdDevices.Add(device);
-                    g.Devices.Add(device);
+                   registerdDevices.Add(dev);
+                   g.DevIds.Add(dev.DeviceId);
                 }
             } 
         }
@@ -111,7 +113,8 @@ namespace NotificationHub.Controllers
                     {
                         if (g.GroupId == d.GroupId)
                         {
-                            g.Devices.Remove(d);
+                        
+                            g.DevIds.Remove(id);
                         }
                     }
                     break;

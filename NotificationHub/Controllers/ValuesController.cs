@@ -13,6 +13,7 @@ namespace NotificationHub.Controllers
         static List<string> strings = new List<string>()
         {
             "milica", "masa", "ana"
+
         };
 
         // GET api/values

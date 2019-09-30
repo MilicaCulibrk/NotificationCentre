@@ -25,22 +25,41 @@ namespace NotificationHub.Models
             set { _deviceName = value; }
         }
 
-         private List<Notification> notifications = new List<Notification>(); //lista primljenih notifikacija
+        static int _i = 0;
+        public  int I
+        {
+            get { return _i; }
+            set { _i = value; }
+        }
+
+        /*List<int> _notId;
+        public List<int> NotId
+        {
+            get { return _notId; }
+            set { NotId = value; }
+        } */
+
+        //public Random a = new Random(DateTime.Now.Ticks.GetHashCode());
 
         public Device()
         {
          
         }
 
-        public Device(int deviceId, int groupId, string deviceName)
+       /* public Device(int deviceId, int groupId, string deviceName)
         {
             this._deviceId = deviceId;
             this._groupId = groupId;
             this._deviceName = deviceName;
+        }*/
+
+        public Device(int groupId, string deviceName)
+        {
+
+            this._deviceId = ++_i;
+            this._groupId = groupId;
+            this._deviceName = deviceName;
         }
-
-
-        
 
     }
 

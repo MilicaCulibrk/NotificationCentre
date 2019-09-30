@@ -19,12 +19,18 @@ namespace NotificationHub.Models
             get { return _groupName; }
             set { _groupName = value; }
         }
-       // private List<Notification> notifications = new List<Notification>(); //lista primljenih notifikacija
-
-        List<Device> _devices;
+    
+       /* List<Device> _devices;
         public List<Device> Devices {
             get { return _devices;  }
             set { _devices = value;  }
+        } */
+
+        List<int> _devIds;
+        public List<int> DevIds
+        {
+            get { return _devIds; }
+            set { _devIds = value; }
         }
 
 
@@ -41,11 +47,18 @@ namespace NotificationHub.Models
             this._groupName = groupName;
         }
 
-        public Group(int groupId, string groupName, List<Device> devices)
+       /* public Group(int groupId, string groupName, List<Device> devices)
         {
             this._groupId = groupId;
             this._groupName = groupName;
             this._devices = devices;
+        }*/
+
+        public Group(int groupId, string groupName, List<int> devIds)
+        {
+            this._groupId = groupId;
+            this._groupName = groupName;
+            this._devIds = devIds;
         }
     }
 }
