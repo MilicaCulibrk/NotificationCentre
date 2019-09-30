@@ -20,11 +20,7 @@ namespace NotificationHub.Models
             set { _groupName = value; }
         }
     
-       /* List<Device> _devices;
-        public List<Device> Devices {
-            get { return _devices;  }
-            set { _devices = value;  }
-        } */
+     
 
         List<int> _devIds;
         public List<int> DevIds
@@ -47,12 +43,7 @@ namespace NotificationHub.Models
             this._groupName = groupName;
         }
 
-       /* public Group(int groupId, string groupName, List<Device> devices)
-        {
-            this._groupId = groupId;
-            this._groupName = groupName;
-            this._devices = devices;
-        }*/
+   
 
         public Group(int groupId, string groupName, List<int> devIds)
         {
