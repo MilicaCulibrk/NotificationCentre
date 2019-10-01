@@ -32,12 +32,19 @@ namespace NotificationHub.Models
             set { _i = value; }
         }
 
+        List<Notification> _notifications;
+        public List<Notification> Notifications
+        {
+            get { return _notifications; }
+            set { _notifications = value; }
+        }
+
+
 
         public Device()
         {
          
         }
-
 
         public Device(int groupId, string deviceName)
         {
@@ -45,6 +52,16 @@ namespace NotificationHub.Models
             this._deviceId = ++_i;
             this._groupId = groupId;
             this._deviceName = deviceName;
+            this._notifications = new List<Notification>();
+        }
+
+        public Device(int groupId, string deviceName, List<Notification> notifications)
+        {
+
+            this._deviceId = ++_i;
+            this._groupId = groupId;
+            this._deviceName = deviceName;
+            this._notifications = notifications;
         }
 
     }

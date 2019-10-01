@@ -22,11 +22,18 @@ namespace NotificationHub.Models
     
      
 
-        List<int> _devIds;
-        public List<int> DevIds
+        List<Device> _devices;
+        public List<Device> Devices
         {
-            get { return _devIds; }
-            set { _devIds = value; }
+            get { return _devices; }
+            set { _devices = value; }
+        }
+
+        static int _k = 0;
+        public int K
+        {
+            get { return _k; }
+            set { _k = value; }
         }
 
 
@@ -43,13 +50,18 @@ namespace NotificationHub.Models
             this._groupName = groupName;
         }
 
-   
+        public Group(string groupName, List<Device> devices)
+        {
+            this._groupId = ++_k;
+            this._groupName = groupName;
+            this._devices = devices;
+        }
 
-        public Group(int groupId, string groupName, List<int> devIds)
+        public Group(int groupId, string groupName, List<Device> devices)
         {
             this._groupId = groupId;
             this._groupName = groupName;
-            this._devIds = devIds;
+            this._devices = devices;
         }
     }
 }

@@ -4,54 +4,55 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NotificationHub.Models;
-using NotificationHub.Services;
 using NotificationHub.Interfaces;
 
 namespace NotificationHub.Controllers
 {
 
-    //[Route("api/[controller]")]
+   
     [ApiController]
     public class DeviceController : Controller
     {
         
         IDeviceBusiness deviceBusiness = new DeviceBusiness();
 
-        //izlistaj uredjaje
-        [Route("api/device")]
+        //get devices
+        [Route("api/device/get")]
         [HttpGet]
         public ActionResult<List<Device>> GetDevices()
         {
 
-            return deviceBusiness.showDevices(); 
+            return deviceBusiness.getDevices(); 
         }
 
-        //izlistaj grupe
-        [Route("api/device/groups")]
+        //get device by id
+        [Route("api/device/get/{id}")]
         [HttpGet]
-        public ActionResult<List<Group>> GetGrupe()
+        public ActionResult<Device> GetDeviceById(int id)
         {
-            return deviceBusiness.showGroups();
 
+            return deviceBusiness.getDeviceById(id);
         }
 
-        //dodaj grupu
-        [Route("api/device/addg")]
-        [HttpPost]
-        public void DodajGrupu([FromBody] Group group)
-        {
-             deviceBusiness.addGroup(group);
-        }
-       
-        // POST api/device  ---> registruj uredjaj
+
+        //add device(post)
         [Route("api/device/registration")]
         [HttpPost]
-        public void RegistrujUredjaj([FromBody] Device device)
+        public void PostDevice([FromBody] Device device)
         {
             deviceBusiness.addDevice(device);      
         }
 
-        //obrisi device
+        //update device(put)
+        [Route("api/device/update/{id}")]
+        [HttpPut]
+        public void PutDevice([FromBody] Device device, int id)
+        {
+            deviceBusiness.updateDevice(device, id);
+        }
+
+
+        //delete device
         [Route("api/device/delete/{id}")]
         [HttpDelete]
         public void DeleteDevice(int id)
@@ -59,13 +60,15 @@ namespace NotificationHub.Controllers
             deviceBusiness.deleteDevice(id);           
         }
 
-        //obrisi grupu
-        [Route("api/device/deleteG/{idd}")]
-        [HttpDelete]
-        public void DeleteGroup(int idd)
-        {
-            deviceBusiness.deleteGroup(idd);
 
+        //delete device from group
+        [Route("api/device/deleteDFG/{idd}/{idg}")]
+        [HttpDelete]
+        public void DeleteDeviceFropmGroup(int idd, int idg)
+        {
+            deviceBusiness.deleteDeviceFromGroup(idd, idg);
         }
+
+
     }
 }

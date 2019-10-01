@@ -19,9 +19,9 @@ namespace NotificationHub.Controllers
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
-         {
-             return strings;
-         }
+        {
+            return strings;
+        }
 
 
 
@@ -35,7 +35,7 @@ namespace NotificationHub.Controllers
         }
 
         // POST api/values
-        [HttpPost]
+        [HttpPost]  
         public void Post([FromBody] string value)
         {
             strings.Add(value);

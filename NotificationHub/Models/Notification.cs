@@ -44,7 +44,7 @@ namespace NotificationHub.Models
         }
 
         static int _j = 0;
-        public int I
+        public int J
         {
             get { return _j; }
             set { _j = value; }
@@ -61,6 +61,7 @@ namespace NotificationHub.Models
             this._type = type;
             this._message = message;
             this._scope = scope;
+            this._date = DateTime.Now;
         }
 
      
