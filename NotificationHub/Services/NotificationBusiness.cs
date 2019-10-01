@@ -45,6 +45,23 @@ namespace NotificationHub
             registerdNotifications.Add(notif);
         }
 
+        public void addExistingNotificationToDevice(int idn, int idd) { 
+       /* {
+            foreach (Device d in DeviceBusiness.registerdDevices)
+            {
+                if (d.DeviceId == idd)
+                {
+                    foreach (Notification n in d.Notifications)
+                    {
+                        if (n.NotId == idn)
+                        {
+                           
+                        }
+                    }
+                }
+            } */
+        }  
+
         public void addNotificationToDevice(Notification notification, int id)
         {
             Notification notif = new Notification(notification.Type, notification.Message, notification.Scope);
@@ -91,6 +108,62 @@ namespace NotificationHub
                 }
             }
 
+        }
+
+        public void deleteNotificaton(int id)
+        {
+            foreach(Group g in GroupBusiness.groups)
+            {
+                foreach (Device d in g.Devices)
+                {
+                    foreach (Notification n in d.Notifications)
+                    {
+                        if (n.NotId == id)
+                        {
+                            d.Notifications.Remove(n);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            foreach (Notification n in registerdNotifications)
+            {
+                if (n.NotId == id)
+                {
+                    registerdNotifications.Remove(n);
+                    break;
+                }
+            }
+        }
+
+        public void updateNotificaton(Notification notification, int id)
+        {
+            foreach (Notification n in registerdNotifications)
+            {
+                if (n.NotId == id)
+                {
+                    n.Type = notification.Type;
+                    n.Message = notification.Message;
+                    n.Scope = notification.Scope;
+                }
+            }
+
+            foreach (Group g in GroupBusiness.groups)
+            {
+                foreach (Device d in g.Devices)
+                {
+                    foreach (Notification n in d.Notifications)
+                    {
+                        if (n.NotId == id)
+                        {
+                            n.Type = notification.Type;
+                            n.Message = notification.Message;
+                            n.Scope = notification.Scope;
+                        }
+                    }
+                }
+            }
         }
 
     }

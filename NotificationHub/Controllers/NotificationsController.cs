@@ -15,7 +15,7 @@ namespace NotificationHub.Controllers
     {
         INotificationBusiness notificationBusiness = new NotificationBusiness();
 
-        //get devices
+        //get notifications
         [Route("api/notifications/get")]
         [HttpGet]
         public ActionResult<List<Notification>> GetNotification()
@@ -31,6 +31,14 @@ namespace NotificationHub.Controllers
         {
 
             return notificationBusiness.getNotificationById(id);
+        }
+
+        //add existing notification to Device(post)
+        [Route("api/notificationsED/registration/{idn}/{idd}")]
+        [HttpPost]
+        public void PostExistingNotificationToDevice(int idn, int idd)
+        {
+            notificationBusiness.addExistingNotificationToDevice(idn, idd);
         }
 
         //add notification(post)
@@ -66,5 +74,23 @@ namespace NotificationHub.Controllers
         {
             notificationBusiness.addNotificationToAll(notification);
         }
+
+        //delete notification(delete)
+        [Route("api/notifications/delete/{id}")]
+        [HttpDelete]
+        public void DeleteNotification(int id)
+        {
+            notificationBusiness.deleteNotificaton(id);
+        }
+
+        //update notification(put)
+        [Route("api/notifications/update/{id}")]
+        [HttpPut]
+        public void UpdateNotification([FromBody] Notification notification, int id)
+        {
+            notificationBusiness.updateNotificaton(notification, id);
+        }
+
+
     }
 }
