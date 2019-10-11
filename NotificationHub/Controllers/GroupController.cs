@@ -11,52 +11,57 @@ namespace NotificationHub.Controllers
 {
     public class GroupController : Controller
     {
-        IGroupBusiness groupBusiness = new GroupBusiness();
-        //get groups
-        [Route("api/groups/get")]
-        [HttpGet]
-        public ActionResult<List<Group>> GetGrupe()
-        {
-            return groupBusiness.getGroups();
+       public static IGroupBusiness groupBusiness = new GroupBusiness();
 
-        }
-
-        //get group by id
-        [Route("api/groups/get/{id}")]
-        [HttpGet]
-        public ActionResult<Group> GetGrupeById(int id)
-        {
-            return groupBusiness.getGroupById(id);
-
-        }
-
-        //add group(post)
-        [Route("api/groups/addg")]
+        //create new group
+        [Route("api/group/create")]
         [HttpPost]
-        public void AddGroup([FromBody] Group group)
+        public void CreateGroup([FromBody] Group group)
         {
             groupBusiness.addGroup(group);
         }
 
-        //update group(put)
-        [Route("api/groups/update/{id}")]
-        [HttpPut]
-        public void UpdateGroup([FromBody] Group group, int id)
+        //list groups
+        [Route("api/group/list")]
+        [HttpGet]
+        public ActionResult<List<Group>> GetGroupsFromDb()
         {
-            groupBusiness.updateGroup(group, id);
+            //DeviceDBContext deviceDBContext = new DeviceDBContext();
+            return groupBusiness.GetGroups();
+
+        }
+  
+         //get group by id
+        [Route("api/group/getId/{id}")]
+        [HttpGet]
+        public ActionResult<Group> GetGroupById(int id)
+        {
+            //DeviceDBContext deviceDBContext = new DeviceDBContext();
+            return groupBusiness.GetGroupById(id);
+
         }
 
+        //add device to group
+        [Route("api/group/addD/{id}")]
+        [HttpPost]
+        public void addDeviceToGroup([FromBody] Device device, [FromHeader] int id)
+        {
+            //DeviceDBContext deviceDBContext = new DeviceDBContext();
+            groupBusiness.addDeviceToGroup(device, id);
 
+        }
 
-
-        //delete group
-        [Route("api/groups/delete/{id}")]
+        //delete device from group
+        [Route("api/group/deleteD/{idd}/{idG}")]
         [HttpDelete]
-        public void DeleteGroup(int id)
+        public void DeleteDeviceFromGroup(int idd, int idg)
         {
-            groupBusiness.deleteGroup(id);
+
+            groupBusiness.DeleteDeviceFromGroup(idd, idg);
 
         }
 
-    }
+    
+
+    } 
 }

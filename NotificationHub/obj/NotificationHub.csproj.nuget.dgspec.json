@@ -1,30 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\C\\source\\repos\\NotificationCentre\\NotificationHub\\NotificationHub.csproj": {}
+    "C:\\git\\NotificationCentre\\NotificationHub\\NotificationHub.csproj": {}
   },
   "projects": {
-    "C:\\Users\\C\\source\\repos\\NotificationCentre\\NotificationHub\\NotificationHub.csproj": {
+    "C:\\git\\NotificationCentre\\NotificationHub\\NotificationHub.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\C\\source\\repos\\NotificationCentre\\NotificationHub\\NotificationHub.csproj",
+        "projectUniqueName": "C:\\git\\NotificationCentre\\NotificationHub\\NotificationHub.csproj",
         "projectName": "NotificationHub",
-        "projectPath": "C:\\Users\\C\\source\\repos\\NotificationCentre\\NotificationHub\\NotificationHub.csproj",
-        "packagesPath": "C:\\Users\\C\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\C\\source\\repos\\NotificationCentre\\NotificationHub\\obj\\",
+        "projectPath": "C:\\git\\NotificationCentre\\NotificationHub\\NotificationHub.csproj",
+        "packagesPath": "C:\\Users\\23nik\\.nuget\\packages\\",
+        "outputPath": "C:\\git\\NotificationCentre\\NotificationHub\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\C\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\23nik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.2"
         ],
         "sources": {
-          "C:\\Program Files\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -41,6 +41,10 @@
       "frameworks": {
         "netcoreapp2.2": {
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
             "Microsoft.AspNet.WebApi.Core": {
               "target": "Package",
               "version": "[5.2.7, )"
@@ -69,6 +73,10 @@
               "version": "[2.2.0, )"
             },
             "Microsoft.AspNetCore.StaticFiles": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[2.2.0, )"
             },
@@ -104,16 +112,34 @@
               "target": "Package",
               "version": "[2.2.3, )"
             },
+            "MySql.Data.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.17, )"
+            },
             "Serilog": {
               "target": "Package",
               "version": "[2.8.0, )"
+            },
+            "System.Configuration.ConfigurationManager": {
+              "target": "Package",
+              "version": "[4.6.0, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.6.0, )"
             }
           },
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

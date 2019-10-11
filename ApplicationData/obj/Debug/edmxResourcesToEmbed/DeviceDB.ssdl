@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DeviceDB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Devices">
+    <Key>
+      <PropertyRef Name="DeviceId" />
+    </Key>
+    <Property Name="DeviceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DeviceName" Type="varchar" MaxLength="50" />
+    <Property Name="GroupId" Type="int" />
+  </EntityType>
+  <EntityType Name="Groups">
+    <Key>
+      <PropertyRef Name="GroupId" />
+    </Key>
+    <Property Name="GroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="NotificationDevices">
+    <Key>
+      <PropertyRef Name="NotificationId" />
+      <PropertyRef Name="DeviceId" />
+    </Key>
+    <Property Name="NotificationId" Type="int" Nullable="false" />
+    <Property Name="DeviceId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Notifications">
+    <Key>
+      <PropertyRef Name="NotificationId" />
+    </Key>
+    <Property Name="NotificationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NotificationType" Type="varchar" MaxLength="50" />
+    <Property Name="NotificationMessage" Type="varchar" MaxLength="50" />
+    <Property Name="NotificationScope" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__Devices__GroupId__403A8C7D">
+    <End Role="Groups" Type="Self.Groups" Multiplicity="0..1" />
+    <End Role="Devices" Type="Self.Devices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="Devices">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Notificat__Devic__48CFD27E">
+    <End Role="Notifications" Type="Self.Notifications" Multiplicity="1" />
+    <End Role="NotificationDevices" Type="Self.NotificationDevices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Notifications">
+        <PropertyRef Name="NotificationId" />
+      </Principal>
+      <Dependent Role="NotificationDevices">
+        <PropertyRef Name="DeviceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Notificat__Notif__47DBAE45">
+    <End Role="Devices" Type="Self.Devices" Multiplicity="1" />
+    <End Role="NotificationDevices" Type="Self.NotificationDevices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Devices">
+        <PropertyRef Name="DeviceId" />
+      </Principal>
+      <Dependent Role="NotificationDevices">
+        <PropertyRef Name="NotificationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DeviceDBStoreContainer">
+    <EntitySet Name="Devices" EntityType="Self.Devices" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NotificationDevices" EntityType="Self.NotificationDevices" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Devices__GroupId__403A8C7D" Association="Self.FK__Devices__GroupId__403A8C7D">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="Devices" EntitySet="Devices" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Notificat__Devic__48CFD27E" Association="Self.FK__Notificat__Devic__48CFD27E">
+      <End Role="Notifications" EntitySet="Notifications" />
+      <End Role="NotificationDevices" EntitySet="NotificationDevices" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Notificat__Notif__47DBAE45" Association="Self.FK__Notificat__Notif__47DBAE45">
+      <End Role="Devices" EntitySet="Devices" />
+      <End Role="NotificationDevices" EntitySet="NotificationDevices" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

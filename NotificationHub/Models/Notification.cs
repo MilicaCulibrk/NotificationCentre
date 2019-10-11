@@ -1,69 +1,45 @@
-﻿using System;
+﻿using NotificationHub.Enums;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace NotificationHub.Models
 {
-    public enum Type {
-           URGENT, WARNING, INFO
-    }
-
-    public enum Scope {
-          GLOBAL, GROUP, DEVICE
-    }
-
-  
+    [Table("TableNotification")]
     public class Notification
     {
-        int _notId;
-        public int NotId
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        public int NotificationId { get; set; }
+
+        public Enums.Type Tip{ get; set; }
+        public String Message { get; set; }
+        public Scope Scope { get; set; }
+
+        public DateTime  date{ get; set; } = DateTime.Now;
+        public List<Device> Devices { get; } = new List<Device>();
+
+        public Notification(int notificationId, Enums.Type tip, string message, Scope scope)
         {
-            get { return _notId; }
-            set { _notId = value; }
-        }
-        Type _type;
-        public Type Type {
-            get { return _type;  }
-            set { _type = value; }
-        }
-        String _message;
-        public String Message {
-            get { return _message; }
-            set { _message = value; }
-        }
-        Scope _scope;
-        public Scope Scope {
-            get { return _scope; }
-            set { _scope = value; }
-        }
-        DateTime _date;
-        public DateTime Date {
-            get { return _date; }
-            set { _date = value; }
-        }
-
-        static int _j = 0;
-        public int J
-        {
-            get { return _j; }
-            set { _j = value; }
-        }
-
-        public Notification()
-        {
+            NotificationId = notificationId;
+            Tip = tip;
+            Message = message;
+            Scope = scope;
 
         }
 
-        public Notification(Type type, string message, Scope scope)
-        {
-            this.NotId = ++_j;
-            this._type = type;
-            this._message = message;
-            this._scope = scope;
-            this._date = DateTime.Now;
-        }
 
-     
+
+        //DateTime Date { get; set; }
+
+
+
+
+
+
     }
 }

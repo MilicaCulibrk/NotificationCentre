@@ -12,3 +12,26 @@ C:\Users\C\source\repos\NotificationCentre\NotificationHub\obj\Debug\netcoreapp2
 C:\Users\C\source\repos\NotificationCentre\NotificationHub\obj\Debug\netcoreapp2.2\NotificationHub.RazorTargetAssemblyInfo.cache
 C:\Users\C\source\repos\NotificationCentre\NotificationHub\obj\Debug\netcoreapp2.2\NotificationHub.dll
 C:\Users\C\source\repos\NotificationCentre\NotificationHub\obj\Debug\netcoreapp2.2\NotificationHub.pdb
+C:\git\NotificationCentre\NotificationHub\obj\Debug\netcoreapp2.2\NotificationHub.dll
+C:\git\NotificationCentre\NotificationHub\obj\Debug\netcoreapp2.2\NotificationHub.pdb
+C:\git\NotificationCentre\NotificationHub\bin\Debug\netcoreapp2.2\appsettings.Development.json
+C:\git\NotificationCentre\NotificationHub\bin\Debug\netcoreapp2.2\appsettings.json
+C:\git\NotificationCentre\NotificationHub\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
+C:\git\NotificationCentre\NotificationHub\bin\Debug\netcoreapp2.2\NotificationHub.deps.json
+C:\git\NotificationCentre\NotificationHub\bin\Debug\netcoreapp2.2\NotificationHub.runtimeconfig.json
+C:\git\NotificationCentre\NotificationHub\bin\Debug\netcoreapp2.2\NotificationHub.runtimeconfig.dev.json
+C:\git\NotificationCentre\NotificationHub\bin\Debug\netcoreapp2.2\NotificationHub.dll
+C:\git\NotificationCentre\NotificationHub\bin\Debug\netcoreapp2.2\NotificationHub.pdb
+C:\git\NotificationCentre\NotificationHub\obj\Debug\netcoreapp2.2\NotificationHub.csprojAssemblyReference.cache
+C:\git\NotificationCentre\NotificationHub\obj\Debug\netcoreapp2.2\NotificationHub.RazorAssemblyInfo.cache
+C:\git\NotificationCentre\NotificationHub\obj\Debug\netcoreapp2.2\NotificationHub.RazorAssemblyInfo.cs
+C:\git\NotificationCentre\NotificationHub\obj\Debug\netcoreapp2.2\NotificationHub.AssemblyInfoInputs.cache
+C:\git\NotificationCentre\NotificationHub\obj\Debug\netcoreapp2.2\NotificationHub.AssemblyInfo.cs
+C:\git\NotificationCentre\NotificationHub\obj\Debug\netcoreapp2.2\NotificationHub.RazorTargetAssemblyInfo.cache
+C:\git\NotificationCentre\NotificationHub\bin\Debug\netcoreapp2.2\Connected Services\Application Insights\ConnectedService.json
+C:\git\NotificationCentre\NotificationHub\bin\Debug\netcoreapp2.2\App.Config
+C:\git\NotificationCentre\NotificationHub\bin\Debug\netcoreapp2.2\NotificationHub.dll.config
+C:\git\NotificationCentre\NotificationHub\bin\Debug\netcoreapp2.2\EntityFramework.dll
+C:\git\NotificationCentre\NotificationHub\bin\Debug\netcoreapp2.2\EntityFramework.xml
+C:\git\NotificationCentre\NotificationHub\obj\Debug\netcoreapp2.2\NotificationHub.csproj.CopyComplete
+C:\git\NotificationCentre\NotificationHub\bin\Debug\netcoreapp2.2\NotificationCentreConfig.json

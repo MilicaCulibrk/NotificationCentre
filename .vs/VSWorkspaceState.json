@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\NotificationHub"
+    "\\NotificationHub",
+    "\\NotificationHub\\Models"
   ],
+  "SelectedNode": "\\NotificationCentre.sln",
   "PreviewInSolutionExplorer": false
 }

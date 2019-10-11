@@ -1,0 +1,12 @@
+C:\git\NotificationCentre\ApplicationData\bin\Debug\ApplicationData.dll.config
+C:\git\NotificationCentre\ApplicationData\bin\Debug\ApplicationData.dll
+C:\git\NotificationCentre\ApplicationData\bin\Debug\ApplicationData.pdb
+C:\git\NotificationCentre\ApplicationData\bin\Debug\EntityFramework.dll
+C:\git\NotificationCentre\ApplicationData\bin\Debug\EntityFramework.SqlServer.dll
+C:\git\NotificationCentre\ApplicationData\bin\Debug\EntityFramework.xml
+C:\git\NotificationCentre\ApplicationData\bin\Debug\EntityFramework.SqlServer.xml
+C:\git\NotificationCentre\ApplicationData\obj\Debug\ApplicationData.csprojAssemblyReference.cache
+C:\git\NotificationCentre\ApplicationData\obj\Debug\ApplicationData.csproj.CopyComplete
+C:\git\NotificationCentre\ApplicationData\obj\Debug\ApplicationData.dll
+C:\git\NotificationCentre\ApplicationData\obj\Debug\ApplicationData.pdb
+C:\git\NotificationCentre\ApplicationData\bin\Debug\System.Data.SqlClient.dll

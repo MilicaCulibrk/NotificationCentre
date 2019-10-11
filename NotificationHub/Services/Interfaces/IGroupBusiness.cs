@@ -8,11 +8,18 @@ namespace NotificationHub.Services.Interfaces
 {
     public interface IGroupBusiness
     {
-        List<Group> getGroups();
-        Group getGroupById(int id);
+        //create new group
         void addGroup(Group group);
-        void updateGroup(Group group, int id);
-        void deleteGroup(int id);
+        //list groups
+        List<Group> GetGroups();
+        //get group by id
+        Group GetGroupById(int GroupId);
+
+        //add device to group
+        void addDeviceToGroup(Device device, int GroupId);
+        //delete device from group
+        void DeleteDeviceFromGroup(int idd, int idg);
+
 
     }
-}
+    }

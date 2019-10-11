@@ -1,0 +1,8 @@
+C:\git\NotificationCentre\ClassLibrary1\bin\Debug\netcoreapp3.0\ClassLibrary1.deps.json
+C:\git\NotificationCentre\ClassLibrary1\bin\Debug\netcoreapp3.0\ClassLibrary1.dll
+C:\git\NotificationCentre\ClassLibrary1\bin\Debug\netcoreapp3.0\ClassLibrary1.pdb
+C:\git\NotificationCentre\ClassLibrary1\obj\Debug\netcoreapp3.0\ClassLibrary1.csprojAssemblyReference.cache
+C:\git\NotificationCentre\ClassLibrary1\obj\Debug\netcoreapp3.0\ClassLibrary1.AssemblyInfoInputs.cache
+C:\git\NotificationCentre\ClassLibrary1\obj\Debug\netcoreapp3.0\ClassLibrary1.AssemblyInfo.cs
+C:\git\NotificationCentre\ClassLibrary1\obj\Debug\netcoreapp3.0\ClassLibrary1.dll
+C:\git\NotificationCentre\ClassLibrary1\obj\Debug\netcoreapp3.0\ClassLibrary1.pdb
