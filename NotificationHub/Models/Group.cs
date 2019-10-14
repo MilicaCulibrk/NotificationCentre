@@ -15,14 +15,15 @@ namespace NotificationHub.Models
         public int GroupId { get; set; }
 
         public String GroupName { get; set; }
+     
+        
+        public   List<Device> Devices { get; } = new List<Device>();
 
-        public List<Device> Devices { get; } = new List<Device>();
-
-        public Group(int groupId, string groupName)
+        public Group()
         {
-            GroupId = groupId;
-            GroupName = groupName;
-            
+            Devices = new List<Device>();
         }
+
+      
     }
 }

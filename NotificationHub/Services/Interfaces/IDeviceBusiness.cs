@@ -16,7 +16,8 @@ namespace NotificationHub.Interfaces
         Device GetDeviceById(int DeviceId);
         //delete device
         void DeleteDevice(int id);
-        
-      
+        //delete device
+        void UpdateDevice(Device device, int id);
+
     }
 }

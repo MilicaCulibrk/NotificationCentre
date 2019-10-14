@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NotificationHub.Controllers;
 using NotificationHub.Database;
@@ -31,13 +33,12 @@ namespace NotificationHub
 
         //register new device
         public void RegisterDevice(Device device)
-        {
-            Device dvc = new Device(device.DeviceId, device.DeviceName);
+        { 
 
             using (context = new NotificationCentreContext())
             {
                 context.Database.EnsureCreated();
-                context.Add(device);
+                context.Devices.Add(device);
 
                 context.SaveChanges();
             }
@@ -50,7 +51,7 @@ namespace NotificationHub
             using (context = new NotificationCentreContext())
             {
 
-                devices = context.Devices.ToList();
+                devices = context.Devices.Include(a => a.Group).ToList();
                
 
             }
@@ -58,41 +59,54 @@ namespace NotificationHub
             return devices;
         }
 
+        //get device by id
         public Device GetDeviceById(int DeviceId)
         {
             Device device;
 
-            using (context = new NotificationCentreContext())
-            {
-                device = context.Devices.First(u => u.DeviceId.Equals(DeviceId));
-            }
+            
+                using (context = new NotificationCentreContext())
+                {
+                   
+                        device = context.Devices.First(u => u.DeviceId.Equals(DeviceId));
 
-            if (device == null)
-            {
-                return null;
-            }
-            else
-            {
-                return device;
-            }
+                }
 
+         
+            return device;
 
         }
-
+        
         //delete device
         public void DeleteDevice(int id)
         {
             using (context = new NotificationCentreContext())
             {
+                var nds = context.NotificationDevices
+               .Where(x => x.DeviceId == id);
+
+                context.RemoveRange(nds);
+
                 context.Remove(context.Devices.Single(a => a.DeviceId.Equals(id)));
-
-
-
                 context.SaveChanges();
             }
         }
 
-    
+        //update device
+        public void UpdateDevice([FromBody] Device device, int id)
+        {
+            Device dev;
+
+            using (context = new NotificationCentreContext())
+            {
+                dev = context.Devices.First(u => u.DeviceId.Equals(id));
+               
+                dev.DeviceName = device.DeviceName;
+                context.SaveChanges();
+            }
+        }
+
+       
 
     }
 }

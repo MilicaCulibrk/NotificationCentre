@@ -21,24 +21,8 @@ namespace NotificationHub.Models
         public Scope Scope { get; set; }
 
         public DateTime  date{ get; set; } = DateTime.Now;
-        public List<Device> Devices { get; } = new List<Device>();
 
-        public Notification(int notificationId, Enums.Type tip, string message, Scope scope)
-        {
-            NotificationId = notificationId;
-            Tip = tip;
-            Message = message;
-            Scope = scope;
-
-        }
-
-
-
-        //DateTime Date { get; set; }
-
-
-
-
+        public List<NotificationDevice> NotificationDevices { get; } = new List<NotificationDevice>();
 
 
     }

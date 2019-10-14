@@ -15,6 +15,7 @@ namespace NotificationHub.Database
         public DbSet<Models.Device> Devices { get; set; }
 
         public DbSet<Models.Notification> Notifications { get; set; }
+        public DbSet<NotificationDevice> NotificationDevices { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string path = "NotificationCentreConfig.json";
@@ -36,9 +37,11 @@ namespace NotificationHub.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-             base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);
 
-             modelBuilder.Entity<Notification>().Property(e => e.Tip).HasConversion(
+            modelBuilder.Entity<NotificationDevice>().HasKey(nd => new { nd.NotificationId, nd.DeviceId });
+
+            modelBuilder.Entity<Notification>().Property(e => e.Tip).HasConversion(
              t => t.ToString(),
              t => (Enums.Type)Enum.Parse(typeof(Enums.Type), t));
 
@@ -48,10 +51,11 @@ namespace NotificationHub.Database
 
             modelBuilder.Entity<Models.Group>()
             .HasMany(c => c.Devices);
+            //.WithOne(c => c.Group);
 
             modelBuilder.Entity<Models.Device>()
                .HasOne(c => c.Group);
-
+               //.WithMany(c => c.Devices);
 
         }
 

@@ -16,14 +16,12 @@ namespace NotificationHub.Models
         [Key]
         public int DeviceId { get; set; }
         public String DeviceName { get; set; }
-        public Group Group { get; set; }
-        public List<Notification> Notifications { get; } = new List<Notification>();
 
-        public Device(int deviceId, string deviceName)
-        {
-            DeviceId = deviceId;
-            DeviceName = deviceName;
-        }
+        
+        public  Group Group { get; set; }
+      
+        public List<NotificationDevice> NotificationDevices { get; } = new List<NotificationDevice>();
+
 
     
     }

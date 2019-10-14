@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using NotificationHub.Models;
 using NotificationHub.Services;
 using NotificationHub.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NotificationHub.Controllers
 {
@@ -13,17 +14,19 @@ namespace NotificationHub.Controllers
     {
        public static IGroupBusiness groupBusiness = new GroupBusiness();
 
-        //create new group
-        [Route("api/group/create")]
+        //add new group
+        [Route("api/group")]
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public void CreateGroup([FromBody] Group group)
         {
             groupBusiness.addGroup(group);
         }
 
         //list groups
-        [Route("api/group/list")]
+        [Route("api/group")]
         [HttpGet]
+
         public ActionResult<List<Group>> GetGroupsFromDb()
         {
             //DeviceDBContext deviceDBContext = new DeviceDBContext();
@@ -32,7 +35,7 @@ namespace NotificationHub.Controllers
         }
   
          //get group by id
-        [Route("api/group/getId/{id}")]
+        [Route("api/group/{id}")]
         [HttpGet]
         public ActionResult<Group> GetGroupById(int id)
         {
@@ -42,18 +45,33 @@ namespace NotificationHub.Controllers
         }
 
         //add device to group
-        [Route("api/group/addD/{id}")]
+        [Route("api/group/{idg}")]
         [HttpPost]
-        public void addDeviceToGroup([FromBody] Device device, [FromHeader] int id)
+        [Authorize(Roles = "Administrator")]
+        public void AddDeviceToGroup([FromBody] Device device, int idg)
         {
-            //DeviceDBContext deviceDBContext = new DeviceDBContext();
-            groupBusiness.addDeviceToGroup(device, id);
+           
+            groupBusiness.AddDeviceToGroup(device, idg);
 
         }
 
+
+
+        //add existing device to group
+        [Route("api/group/{idd}/{idg}")]
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public void addExistingDeviceToGroup(int idd, int idg)
+         {
+             //DeviceDBContext deviceDBContext = new DeviceDBContext();
+             groupBusiness.addExistingDeviceToGroup(idd, idg);
+
+         }
+
         //delete device from group
-        [Route("api/group/deleteD/{idd}/{idG}")]
+        [Route("api/group/{idd}/{idG}")]
         [HttpDelete]
+        [Authorize(Roles = "Administrator")]
         public void DeleteDeviceFromGroup(int idd, int idg)
         {
 
@@ -61,7 +79,36 @@ namespace NotificationHub.Controllers
 
         }
 
-    
+
+        //delete group
+        [Route("api/group/delete/{id}")]
+        [HttpDelete]
+        [Authorize(Roles = "Administrator")]
+        public void DeleteGroup(int id)
+        {
+
+            groupBusiness.DeleteGroup(id);
+
+        }
+
+        //list devices in a group
+        [Route("api/group/{id}")]
+        [HttpGet]
+        public ActionResult<List<Device>> ListDevices(int id)
+        {
+
+            return groupBusiness.ListDevices(id);
+
+        }
+
+        //update group
+        [Route("api/group/{id}")]
+        [HttpPut]
+        [Authorize(Roles = "Administrator")]
+        public void UpdateGroup([FromBody] Group group, int id)
+        {
+            groupBusiness.UpdateGroup(group, id);
+        }
 
     } 
 }

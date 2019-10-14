@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NotificationHub.Models;
 using NotificationHub.Interfaces;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace NotificationHub.Controllers
 {
@@ -18,8 +18,9 @@ namespace NotificationHub.Controllers
         public static IDeviceBusiness deviceBusiness = new DeviceBusiness();
 
         //register new device
-        [Route("api/device/register")]
+        [Route("api/device")]
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public void RegisterDevice([FromBody] Device device)
         {
             deviceBusiness.RegisterDevice(device);
@@ -27,7 +28,7 @@ namespace NotificationHub.Controllers
 
 
         //list available devices
-        [Route("api/device/list")]
+        [Route("api/device")]
         [HttpGet]
         public ActionResult<List<Device>> ListDevices()
         {
@@ -37,8 +38,9 @@ namespace NotificationHub.Controllers
         }
 
         //delete device
-        [Route("api/device/delete/{id}")]
+        [Route("api/device/{id}")]
         [HttpDelete]
+        [Authorize(Roles = "Administrator")]
         public void DeleteDevice(int id)
         {
      
@@ -47,17 +49,25 @@ namespace NotificationHub.Controllers
         }
 
         //get device by id
-        [Route("api/device/getId/{id}")]
+        [Route("api/device/{id}")]
         [HttpGet]
         public ActionResult<Device> GetDeviceById(int id)
         {
-            //DeviceDBContext deviceDBContext = new DeviceDBContext();
             return deviceBusiness.GetDeviceById(id);
+          
+        }
 
+        //update device
+        [Route("api/device/{id}")]
+        [HttpPut]
+        [Authorize(Roles = "Administrator")]
+        public void UpdateDevice([FromBody] Device device, [FromHeader] int id)
+        {
+            deviceBusiness.UpdateDevice(device, id);
         }
 
 
-     
+
 
     }
 }
