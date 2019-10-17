@@ -17,9 +17,10 @@ namespace NotificationHub.Models
         public int DeviceId { get; set; }
         public String DeviceName { get; set; }
 
-        
+       // [Newtonsoft.Json.JsonIgnore]
         public  Group Group { get; set; }
-      
+
+        //[Newtonsoft.Json.JsonIgnore]
         public List<NotificationDevice> NotificationDevices { get; } = new List<NotificationDevice>();
 
 

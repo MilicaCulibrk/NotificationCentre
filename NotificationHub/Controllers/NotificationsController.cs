@@ -19,7 +19,7 @@ namespace NotificationHub.Controllers
         //add notification to device
         [Route("api/notification/{id}")]
         [HttpPost]
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
         public void addNotification([FromBody] Notification notification, int id)
         {
             notificationBusiness.addNotificationToDevice(notification, id);

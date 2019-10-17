@@ -1,0 +1,16 @@
+C:\git\NotificationCentre\NotificationPlugin\bin\Debug\netcoreapp3.0\NotificationPlugin.exe
+C:\git\NotificationCentre\NotificationPlugin\bin\Debug\netcoreapp3.0\NotificationPlugin.deps.json
+C:\git\NotificationCentre\NotificationPlugin\bin\Debug\netcoreapp3.0\NotificationPlugin.runtimeconfig.json
+C:\git\NotificationCentre\NotificationPlugin\bin\Debug\netcoreapp3.0\NotificationPlugin.runtimeconfig.dev.json
+C:\git\NotificationCentre\NotificationPlugin\bin\Debug\netcoreapp3.0\NotificationPlugin.dll
+C:\git\NotificationCentre\NotificationPlugin\bin\Debug\netcoreapp3.0\NotificationPlugin.pdb
+C:\git\NotificationCentre\NotificationPlugin\obj\Debug\netcoreapp3.0\NotificationPlugin.csprojAssemblyReference.cache
+C:\git\NotificationCentre\NotificationPlugin\obj\Debug\netcoreapp3.0\NotificationPlugin.AssemblyInfoInputs.cache
+C:\git\NotificationCentre\NotificationPlugin\obj\Debug\netcoreapp3.0\NotificationPlugin.AssemblyInfo.cs
+C:\git\NotificationCentre\NotificationPlugin\obj\Debug\netcoreapp3.0\NotificationPlugin.dll
+C:\git\NotificationCentre\NotificationPlugin\obj\Debug\netcoreapp3.0\NotificationPlugin.pdb
+C:\git\NotificationCentre\NotificationPlugin\bin\Debug\netcoreapp3.0\System.Net.Http.Formatting.dll
+C:\git\NotificationCentre\NotificationPlugin\bin\Debug\netcoreapp3.0\Newtonsoft.Json.dll
+C:\git\NotificationCentre\NotificationPlugin\bin\Debug\netcoreapp3.0\Newtonsoft.Json.Bson.dll
+C:\git\NotificationCentre\NotificationPlugin\obj\Debug\netcoreapp3.0\NotificationPlugin.csproj.CopyComplete
+C:\git\NotificationCentre\NotificationPlugin\bin\Debug\netcoreapp3.0\Json.Net.dll

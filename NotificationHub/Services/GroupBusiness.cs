@@ -9,11 +9,16 @@ using NotificationHub.Controllers;
 using NotificationHub.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using static Google.Protobuf.JsonFormatter;
+using Newtonsoft.Json;
 
 namespace NotificationHub.Services
 {
+   
     public class GroupBusiness : IGroupBusiness
     {
+       
+        
         public NotificationCentreContext context;
         public List<Group> groups;
         public List<Device> dlist = new List<Device>();
@@ -38,7 +43,7 @@ namespace NotificationHub.Services
 
             using (context = new NotificationCentreContext())
             {
-                context.Database.EnsureCreated();
+                //ntext.Database.EnsureCreated();
                 context.Groups.Add(group);
                 //context.Groups.Add(groupDB);
                 context.SaveChanges();
@@ -81,7 +86,7 @@ namespace NotificationHub.Services
                 {
               
                         grp = context.Groups.FirstOrDefault(u => u.GroupId.Equals(id));
-                        grp.Devices.Add(device);
+                       grp.Devices.Add(device);
                         context.Devices.Add(device);
 
                 }
@@ -118,7 +123,6 @@ namespace NotificationHub.Services
             {
 
                 groups = context.Groups.Include(a => a.Devices).ToList();
-
 
             }
 

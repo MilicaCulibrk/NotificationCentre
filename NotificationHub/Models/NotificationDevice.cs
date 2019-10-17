@@ -8,9 +8,11 @@ namespace NotificationHub.Models
     public class NotificationDevice
     {
         public int NotificationId { get; set; }
+        [Newtonsoft.Json.JsonIgnore]
         public Notification notification { get; set; }
 
         public int DeviceId { get; set; }
+        [Newtonsoft.Json.JsonIgnore]
         public Device device { get; set; }
     }
 }

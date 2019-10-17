@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Authorization;
 namespace NotificationHub.Controllers
 {
 
-   
+
     [ApiController]
     public class DeviceController : Controller
     {
-        
+
         public static IDeviceBusiness deviceBusiness = new DeviceBusiness();
 
         //register new device
@@ -32,19 +32,26 @@ namespace NotificationHub.Controllers
         [HttpGet]
         public ActionResult<List<Device>> ListDevices()
         {
-     
             return deviceBusiness.ListDevices();
-            
         }
 
         //delete device
         [Route("api/device/{id}")]
         [HttpDelete]
         [Authorize(Roles = "Administrator")]
-        public void DeleteDevice(int id)
+        public ActionResult DeleteDevice(int id)
         {
-     
-            deviceBusiness.DeleteDevice(id);
+            if (deviceBusiness.GetDeviceById(id) == null)
+            {
+                return NotFound();
+
+            }
+            else
+            {
+                deviceBusiness.DeleteDevice(id);
+                return Ok();
+            }
+            
 
         }
 
@@ -53,20 +60,47 @@ namespace NotificationHub.Controllers
         [HttpGet]
         public ActionResult<Device> GetDeviceById(int id)
         {
-            return deviceBusiness.GetDeviceById(id);
-          
+            if (deviceBusiness.GetDeviceById(id) != null)
+            {
+                
+                return Ok(deviceBusiness.GetDeviceById(id));
+            }
+            else
+            {
+                return NotFound();
+            }
+
+
         }
 
         //update device
         [Route("api/device/{id}")]
         [HttpPut]
         [Authorize(Roles = "Administrator")]
-        public void UpdateDevice([FromBody] Device device, [FromHeader] int id)
+        public ActionResult UpdateDevice([FromBody] Device device, [FromHeader] int id)
         {
-            deviceBusiness.UpdateDevice(device, id);
+          
+            if (deviceBusiness.GetDeviceById(id) != null)
+            {
+
+                deviceBusiness.UpdateDevice(device, id);
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
+        //list notifications in a device
+        [Route("api/device/notifications/{id}")]
+        [HttpGet]
+        public ActionResult<List<Notification>> ListNotificationsFromDevice(int id)
+        {
 
+            return deviceBusiness.ListNotificationsFromDevice(id);
+
+        }
 
 
     }

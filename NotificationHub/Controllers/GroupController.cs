@@ -92,7 +92,7 @@ namespace NotificationHub.Controllers
         }
 
         //list devices in a group
-        [Route("api/group/{id}")]
+        [Route("api/group/devices/{id}")]
         [HttpGet]
         public ActionResult<List<Device>> ListDevices(int id)
         {

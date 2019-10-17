@@ -41,13 +41,17 @@ namespace NotificationHub.Database
 
             modelBuilder.Entity<NotificationDevice>().HasKey(nd => new { nd.NotificationId, nd.DeviceId });
 
-            modelBuilder.Entity<Notification>().Property(e => e.Tip).HasConversion(
+             modelBuilder.Entity<Notification>().Property(e => e.Tip).HasConversion(
              t => t.ToString(),
              t => (Enums.Type)Enum.Parse(typeof(Enums.Type), t));
 
              modelBuilder.Entity<Notification>().Property(e => e.Scope).HasConversion(
              t => t.ToString(),
              t => (Enums.Scope)Enum.Parse(typeof(Enums.Scope), t));
+
+             modelBuilder.Entity<Notification>().Property(e => e.Received).HasConversion(
+             t => t.ToString(),
+             t => Boolean.Parse(t));
 
             modelBuilder.Entity<Models.Group>()
             .HasMany(c => c.Devices);

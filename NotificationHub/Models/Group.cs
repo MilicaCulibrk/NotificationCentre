@@ -15,9 +15,10 @@ namespace NotificationHub.Models
         public int GroupId { get; set; }
 
         public String GroupName { get; set; }
-     
-        
-        public   List<Device> Devices { get; } = new List<Device>();
+
+
+        [Newtonsoft.Json.JsonIgnore]
+        public virtual  List<Device> Devices { get; } = new List<Device>();
 
         public Group()
         {
