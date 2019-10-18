@@ -7,6 +7,6 @@ namespace NotificationHub.Enums
 {
     public enum Type
     {
-        URGENT, WARNING, INFO
+        URGENT, WARNING, INFO  
     }
 }

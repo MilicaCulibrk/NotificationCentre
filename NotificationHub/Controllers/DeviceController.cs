@@ -9,23 +9,27 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace NotificationHub.Controllers
 {
-
-
     [ApiController]
     public class DeviceController : Controller
     {
-
         public static IDeviceBusiness deviceBusiness = new DeviceBusiness();
 
         //register new device
         [Route("api/device")]
         [HttpPost]
         [Authorize(Roles = "Administrator")]
-        public void RegisterDevice([FromBody] Device device)
+        public ActionResult RegisterDevice([FromBody] Device device)
         {
-            deviceBusiness.RegisterDevice(device);
+            if (deviceBusiness.GetDeviceById(device.DeviceId) != null)
+            {
+                return Forbid();
+            }
+            else
+            {
+                deviceBusiness.RegisterDevice(device);
+                return Ok();
+            }         
         }
-
 
         //list available devices
         [Route("api/device")]
@@ -51,8 +55,6 @@ namespace NotificationHub.Controllers
                 deviceBusiness.DeleteDevice(id);
                 return Ok();
             }
-            
-
         }
 
         //get device by id
@@ -69,26 +71,23 @@ namespace NotificationHub.Controllers
             {
                 return NotFound();
             }
-
-
         }
 
         //update device
         [Route("api/device/{id}")]
         [HttpPut]
         [Authorize(Roles = "Administrator")]
-        public ActionResult UpdateDevice([FromBody] Device device, [FromHeader] int id)
+        public ActionResult UpdateDevice([FromBody] Device device, int id)
         {
-          
-            if (deviceBusiness.GetDeviceById(id) != null)
+            if (deviceBusiness.GetDeviceById(id) == null)
             {
+                return NotFound();
 
-                deviceBusiness.UpdateDevice(device, id);
-                return Ok();
             }
             else
             {
-                return NotFound();
+                deviceBusiness.UpdateDevice(device, id);
+                return Ok();
             }
         }
 
@@ -97,11 +96,14 @@ namespace NotificationHub.Controllers
         [HttpGet]
         public ActionResult<List<Notification>> ListNotificationsFromDevice(int id)
         {
-
-            return deviceBusiness.ListNotificationsFromDevice(id);
-
+            if (deviceBusiness.GetDeviceById(id) == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(deviceBusiness.ListNotificationsFromDevice(id));
+            }
         }
-
-
     }
 }

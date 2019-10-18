@@ -13,19 +13,15 @@ using static Google.Protobuf.JsonFormatter;
 using Newtonsoft.Json;
 
 namespace NotificationHub.Services
-{
-   
+{ 
     public class GroupBusiness : IGroupBusiness
-    {
-       
-        
+    {        
         public NotificationCentreContext context;
         public List<Group> groups;
         public List<Device> dlist = new List<Device>();
 
         public GroupBusiness()   //ako nema u bazi nista, kreiraj
         {
-
             using (context = new NotificationCentreContext())
             {
                 context.Database.EnsureCreated();
@@ -34,18 +30,9 @@ namespace NotificationHub.Services
 
         public void addGroup(Group group)
         {
-            //Group grp = new Group(group.GroupId, group.GroupName);
-           // grp.Devices.Add
-           // grp.Devices.Add[DeviceContext.Devices];
-            //GroupDB groupDB = ConvertGroupToGroupDB(grp);
-            //List<DeviceDB> dvd = DeviceController.deviceBusiness.GetDevices();
-            //groupDB.Devices.Add(dvd[3]);
-
             using (context = new NotificationCentreContext())
-            {
-                //ntext.Database.EnsureCreated();
+            {   
                 context.Groups.Add(group);
-                //context.Groups.Add(groupDB);
                 context.SaveChanges();
             }
         }
@@ -58,7 +45,6 @@ namespace NotificationHub.Services
             {
                 group = context.Groups.FirstOrDefault(u => u.GroupId.Equals(GroupId));
             }
-
             if (group == null)
             {
                 return null;
@@ -66,9 +52,7 @@ namespace NotificationHub.Services
             else
             {
                 return group;
-            }
-
-            
+            }           
         }
 
         //add device to group
@@ -84,58 +68,40 @@ namespace NotificationHub.Services
                 }
                 else
                 {
-              
-                        grp = context.Groups.FirstOrDefault(u => u.GroupId.Equals(id));
+                       grp = context.Groups.FirstOrDefault(u => u.GroupId.Equals(id));
                        grp.Devices.Add(device);
-                        context.Devices.Add(device);
-
+                       context.Devices.Add(device);
                 }
                 context.SaveChanges();
-            }
-
-        
+            }      
         }
 
         //add existing device to group
         public void addExistingDeviceToGroup(int DeviceId, int GroupId)
         {
-
-            //Device dvc = new Device(device.DeviceId, device.DeviceName);
-
             Group grp;
 
             using (context = new NotificationCentreContext())
             {
-
                 grp = context.Groups.First(u => u.GroupId.Equals(GroupId));
                 grp.Devices.Add(context.Devices.First(u => u.DeviceId.Equals(DeviceId)));
-                //context.Devices.Add(context.Devices.First(u => u.DeviceId.Equals(DeviceId)));
-
                 context.SaveChanges();
             }
-
         }
 
         public List<Group> GetGroups()
-        {
-           
+        {           
             using (context = new NotificationCentreContext())
             {
-
                 groups = context.Groups.Include(a => a.Devices).ToList();
-
             }
-
             return groups;
         }
 
-
         public void DeleteDeviceFromGroup(int idd, int idg)
         {
-
             using (context = new NotificationCentreContext())
             {
-
                 Group grp = context.Groups.First(u => u.GroupId.Equals(idg));
                 Device dev = context.Devices.FirstOrDefault(u => u.DeviceId.Equals(idd));
 
@@ -145,12 +111,10 @@ namespace NotificationHub.Services
 
                 context.SaveChanges();
             }
-
         }
 
         public void DeleteGroup(int id)
         {
-
             Group grp;
 
             using (context = new NotificationCentreContext())
@@ -174,9 +138,7 @@ namespace NotificationHub.Services
 
                 context.Remove(context.Groups.Single(a => a.GroupId.Equals(id)));
                 context.SaveChanges();
-
             }
-
         }
 
         public List<Device> ListDevices(int id)
@@ -185,11 +147,9 @@ namespace NotificationHub.Services
 
             using (context = new NotificationCentreContext())
             {
-
               grp = context.Groups.Include(a => a.Devices).First(u => u.GroupId.Equals(id));
 
             }
-
             return grp.Devices;
         }
 
@@ -206,6 +166,5 @@ namespace NotificationHub.Services
                 context.SaveChanges();
             }
         }
-
     }
 }

@@ -24,6 +24,5 @@ namespace NotificationHub.Interfaces
         void DeleteNotificationFromDevice(int idn, int idd);
         //delete all notifications from device
         void DeleteAllNotificationFromDevice(int idd);
-
     }
 }

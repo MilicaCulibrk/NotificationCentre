@@ -20,6 +20,5 @@ namespace NotificationHub.Interfaces
         void UpdateDevice(Device device, int id);
         //list notifications from device
         List<Notification> ListNotificationsFromDevice(int id);
-
     }
 }

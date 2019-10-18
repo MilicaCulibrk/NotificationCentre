@@ -12,83 +12,115 @@ namespace NotificationHub.Controllers
 {
     public class GroupController : Controller
     {
-       public static IGroupBusiness groupBusiness = new GroupBusiness();
+        public static IGroupBusiness groupBusiness = new GroupBusiness();
 
         //add new group
         [Route("api/group")]
         [HttpPost]
         [Authorize(Roles = "Administrator")]
-        public void CreateGroup([FromBody] Group group)
+        public ActionResult CreateGroup([FromBody] Group group)
         {
-            groupBusiness.addGroup(group);
+            if (groupBusiness.GetGroupById(group.GroupId) != null)
+            {
+                return Forbid();
+            }
+            else
+            {
+                groupBusiness.addGroup(group);
+                return Ok();
+            }
         }
-
+   
         //list groups
         [Route("api/group")]
         [HttpGet]
-
         public ActionResult<List<Group>> GetGroupsFromDb()
         {
-            //DeviceDBContext deviceDBContext = new DeviceDBContext();
             return groupBusiness.GetGroups();
-
         }
-  
-         //get group by id
+
+        //get group by id
         [Route("api/group/{id}")]
         [HttpGet]
         public ActionResult<Group> GetGroupById(int id)
         {
-            //DeviceDBContext deviceDBContext = new DeviceDBContext();
-            return groupBusiness.GetGroupById(id);
-
+            if (groupBusiness.GetGroupById(id) != null)
+            {
+                return Ok(groupBusiness.GetGroupById(id));
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         //add device to group
         [Route("api/group/{idg}")]
         [HttpPost]
         [Authorize(Roles = "Administrator")]
-        public void AddDeviceToGroup([FromBody] Device device, int idg)
+        public ActionResult AddDeviceToGroup([FromBody] Device device, int idg)
         {
-           
-            groupBusiness.AddDeviceToGroup(device, idg);
+            if (groupBusiness.GetGroupById(idg) != null && DeviceController.deviceBusiness.GetDeviceById(device.DeviceId) == null) 
+            {
+                groupBusiness.AddDeviceToGroup(device, idg);
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
 
         }
-
-
 
         //add existing device to group
         [Route("api/group/{idd}/{idg}")]
         [HttpPost]
         [Authorize(Roles = "Administrator")]
-        public void addExistingDeviceToGroup(int idd, int idg)
+        public ActionResult addExistingDeviceToGroup(int idd, int idg)
          {
-             //DeviceDBContext deviceDBContext = new DeviceDBContext();
-             groupBusiness.addExistingDeviceToGroup(idd, idg);
-
-         }
+            if (groupBusiness.GetGroupById(idg) != null && groupBusiness.GetGroupById(idd) != null)
+            {
+                groupBusiness.addExistingDeviceToGroup(idd, idg);
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
 
         //delete device from group
         [Route("api/group/{idd}/{idG}")]
         [HttpDelete]
         [Authorize(Roles = "Administrator")]
-        public void DeleteDeviceFromGroup(int idd, int idg)
+        public ActionResult DeleteDeviceFromGroup(int idd, int idg)
         {
-
-            groupBusiness.DeleteDeviceFromGroup(idd, idg);
-
+            if (groupBusiness.GetGroupById(idg) != null && groupBusiness.GetGroupById(idd) != null)
+            {
+                groupBusiness.DeleteDeviceFromGroup(idd, idg);
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }    
         }
 
-
         //delete group
-        [Route("api/group/delete/{id}")]
+        [Route("api/group/{id}")]
         [HttpDelete]
         [Authorize(Roles = "Administrator")]
-        public void DeleteGroup(int id)
+        public ActionResult DeleteGroup(int id)
         {
-
-            groupBusiness.DeleteGroup(id);
-
+            if (groupBusiness.GetGroupById(id) == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                groupBusiness.DeleteGroup(id);
+                return Ok();
+            }
         }
 
         //list devices in a group
@@ -96,19 +128,31 @@ namespace NotificationHub.Controllers
         [HttpGet]
         public ActionResult<List<Device>> ListDevices(int id)
         {
-
-            return groupBusiness.ListDevices(id);
-
+            if (groupBusiness.GetGroupById(id) != null)
+            {
+                return Ok(groupBusiness.ListDevices(id));
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         //update group
         [Route("api/group/{id}")]
         [HttpPut]
         [Authorize(Roles = "Administrator")]
-        public void UpdateGroup([FromBody] Group group, int id)
+        public ActionResult UpdateGroup([FromBody] Group group, int id)
         {
-            groupBusiness.UpdateGroup(group, id);
+            if (groupBusiness.GetGroupById(id) == null)
+            {
+                return NotFound();          
+            }
+            else
+            {
+                groupBusiness.UpdateGroup(group, id);
+                return Ok();
+            }
         }
-
     } 
 }

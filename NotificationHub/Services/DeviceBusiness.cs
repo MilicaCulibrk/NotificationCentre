@@ -19,23 +19,20 @@ namespace NotificationHub
         public NotificationCentreContext context;
         public List<Device> devices;
         public Group grp;
-        public Device dvc;
+        public Device dvc; 
         List<Notification> notifications = new List<Notification>();
 
         public DeviceBusiness()   //ako nema u bazi nista, kreiraj
         {
-
             using (context = new NotificationCentreContext())
             {
                 context.Database.EnsureCreated();
             }
         }
 
-
         //register new device
         public void RegisterDevice(Device device)
-        { 
-
+        {
             using (context = new NotificationCentreContext())
             {
                 context.Database.EnsureCreated();
@@ -48,14 +45,10 @@ namespace NotificationHub
         //list available
         public List<Device> ListDevices()
         {
-           
             using (context = new NotificationCentreContext())
             {
-               
                 devices = context.Devices.Include(a => a.Group).Include(x => x.NotificationDevices).ToList();
-               
             }
-
             return devices;
         }
 
@@ -64,20 +57,14 @@ namespace NotificationHub
         {
             Device device;
 
-            
-                using (context = new NotificationCentreContext())
-                {
-                   
-                        device = context.Devices.FirstOrDefault(u => u.DeviceId.Equals(DeviceId));
-
-                }
-
-         
+            using (context = new NotificationCentreContext())
+            {
+                device = context.Devices.FirstOrDefault(u => u.DeviceId.Equals(DeviceId));
+            }
             return device;
-
         }
-        
-        //delete device
+
+        //delete deviceb
         public void DeleteDevice(int id)
         {
             using (context = new NotificationCentreContext())
@@ -87,12 +74,8 @@ namespace NotificationHub
 
                 context.RemoveRange(nds);
 
-                if (GetDeviceById(id) != null)
-                {
-                    context.Remove(context.Devices.SingleOrDefault(a => a.DeviceId.Equals(id)));
-                    context.SaveChanges();
-                }
-       
+                context.Remove(context.Devices.Single(a => a.DeviceId.Equals(id)));
+                context.SaveChanges();
             }
         }
 
@@ -103,20 +86,11 @@ namespace NotificationHub
 
             using (context = new NotificationCentreContext())
             {
-
                 {
                     dev = context.Devices.First(u => u.DeviceId.Equals(id));
-                   
-                    if (GetDeviceById(id) != null)
-                    {
-                        dev.DeviceName = device.DeviceName;
-                        context.SaveChanges();
-                    }
-            
-                  
+                    dev.DeviceName = device.DeviceName;
+                    context.SaveChanges();
                 }
-
-             
             }
         }
 
@@ -125,7 +99,6 @@ namespace NotificationHub
 
             using (context = new NotificationCentreContext())
             {
-           
                 var nd = context.NotificationDevices.Where(x => x.DeviceId == id); //nasli smo sve veze izmedju tog devica i njegovih notifikacija
                 notifications.Clear();
 
@@ -134,17 +107,13 @@ namespace NotificationHub
                     Notification ntf = context.Notifications.FirstOrDefault(x => x.NotificationId == notdev.NotificationId); //sve notifikacije dodaj u listu
                     if (ntf.Received.Equals(false))
                     {
-                       
                         notifications.Add(ntf);
                         ntf.Received = true;
                         context.SaveChanges();
                     }
-              
                 }
             }
-
             return notifications;
         }
-
     }
 }

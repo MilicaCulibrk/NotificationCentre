@@ -9,93 +9,135 @@ using NotificationHub.Interfaces;
 using NotificationHub.Models;
 
 namespace NotificationHub.Controllers
-{
-   
+{  
     [ApiController]
     public class NotificationsController : Controller
     {
         public static INotificationBusiness notificationBusiness = new NotificationBusiness();
-        
+      
         //add notification to device
         [Route("api/notification/{id}")]
         [HttpPost]
-        //[Authorize(Roles = "Administrator")]
-        public void addNotification([FromBody] Notification notification, int id)
+        [Authorize(Roles = "Administrator")]
+        public ActionResult addNotification([FromBody] Notification notification, int id)
         {
-            notificationBusiness.addNotificationToDevice(notification, id);
+            if (DeviceController.deviceBusiness.GetDeviceById(id) == null && notificationBusiness.GetNotificationById(notification.NotificationId) == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                notificationBusiness.addNotificationToDevice(notification, id);
+                return Ok();
+            }
         }
 
-       //add notification to group
+        //add notification to group
         [Route("api/notification/addG/{id}")]
         [HttpPost]
         [Authorize(Roles = "Administrator")]
-        public void addNotificationToGroup([FromBody] Notification notification, int id)
-        {
-            notificationBusiness.addNotificationToGroup(notification, id);
+        public ActionResult addNotificationToGroup([FromBody] Notification notification, int id)
+        { 
+            if (DeviceController.deviceBusiness.GetDeviceById(id) == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                notificationBusiness.addNotificationToGroup(notification, id);
+                return Ok();
+            }     
         }
-
 
         //list notifications
         [Route("api/notification")]
         [HttpGet]
         public ActionResult<List<Notification>> ListNotifications()
         {
-            //DeviceDBContext deviceDBContext = new DeviceDBContext();
             return notificationBusiness.ListNotifications();
-
         }
 
         //get notification by id
         [Route("api/notification/{id}")]
         [HttpGet]
-        public ActionResult<Notification> GetGroupById(int id)
+        public ActionResult<Notification> GetNotificationById(int id)
         {
-            //DeviceDBContext deviceDBContext = new DeviceDBContext();
-            return notificationBusiness.GetNotificationById(id);
-
+            if (notificationBusiness.GetNotificationById(id) != null)
+            {
+                return Ok(notificationBusiness.GetNotificationById(id));
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         //update notification
         [Route("api/notification/{id}")]
         [HttpPut]
         [Authorize(Roles = "Administrator")]
-        public void UpdateNotification([FromBody] Notification notification, int id)
+        public ActionResult UpdateNotification([FromBody] Notification notification, int id)
         {
-            notificationBusiness.UpdateNotification(notification, id);
+            if (notificationBusiness.GetNotificationById(id) == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                notificationBusiness.UpdateNotification(notification, id);
+                return Ok();
+            }     
         }
 
         //delete notification
         [Route("api/notification/{id}")]
         [HttpDelete]
         [Authorize(Roles = "Administrator")]
-        public void DeleteDevice(int id)
+        public ActionResult DeleteNotification(int id)
         {
-
-            notificationBusiness.DeleteNotification(id);
-
+            if (notificationBusiness.GetNotificationById(id) == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                notificationBusiness.DeleteNotification(id);
+                return Ok();
+            }
         }
 
         //delete notification FROM DEVICE
         [Route("api/notification/{idn}/{idd}")]
         [HttpDelete]
         [Authorize(Roles = "Administrator")]
-        public void DeleteNotificationFromDevice(int idn, int idd)
+        public ActionResult DeleteNotificationFromDevice(int idn, int idd)
         {
-
-            notificationBusiness.DeleteNotificationFromDevice(idn, idd);
-
+            if (notificationBusiness.GetNotificationById(idn) == null && notificationBusiness.GetNotificationById(idd) == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                notificationBusiness.DeleteNotificationFromDevice(idn, idd);
+                return Ok();
+            }
         }
 
         //delete all notifications FROM DEVICE
-        [Route("api/notification/{idd}")]
+        [Route("api/notification/all/{idd}")]
         [HttpDelete]
         [Authorize(Roles = "Administrator")]
-        public void DeleteAllNotificationFromDevice(int idd)
+        public ActionResult DeleteAllNotificationFromDevice(int idd)
         {
-
-            notificationBusiness.DeleteAllNotificationFromDevice(idd);
-
+            if (notificationBusiness.GetNotificationById(idd) == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                notificationBusiness.DeleteAllNotificationFromDevice(idd);
+                return Ok();
+            }
         }
-
     }
 }

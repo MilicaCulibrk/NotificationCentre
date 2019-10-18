@@ -27,6 +27,5 @@ namespace NotificationHub.Services.Interfaces
         List<Device> ListDevices(int id);
         //update group
         void UpdateGroup(Group group, int id);
-
     }
  }

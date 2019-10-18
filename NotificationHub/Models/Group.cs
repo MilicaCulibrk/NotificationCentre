@@ -7,24 +7,14 @@ using System.Threading.Tasks;
 
 namespace NotificationHub.Models
 {
-    [Table("TableGroup")]
+    [Table("DeviceGroups")]
     public class Group
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int GroupId { get; set; }
-
         public String GroupName { get; set; }
-
-
         [Newtonsoft.Json.JsonIgnore]
         public virtual  List<Device> Devices { get; } = new List<Device>();
-
-        public Group()
-        {
-            Devices = new List<Device>();
-        }
-
-      
     }
 }

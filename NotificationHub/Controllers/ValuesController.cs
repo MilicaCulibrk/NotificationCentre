@@ -11,7 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace NotificationHub.Controllers
 {
-    [Route("api/[controller]")]   //default route
+    [Route("api/[controller]")]  
     [ApiController]
  
     public class ValuesController : ControllerBase
@@ -19,11 +19,9 @@ namespace NotificationHub.Controllers
         static List<string> strings = new List<string>()
         {
             "milica", "masa", "ana"
-
         };
 
-        // GET api/values
-        
+        // GET api/values      
         [HttpGet]
         [Authorize(Roles = "Administrator")]
         public ActionResult<IEnumerable<string>> Get()
@@ -45,8 +43,7 @@ namespace NotificationHub.Controllers
             //add claims
             var claims = new List<Claim>();
             claims.Add(new Claim(ClaimTypes.Role, "Administrator"));
-         
-
+        
             //create token
             var token = new JwtSecurityToken(
                     issuer: "smesk.in",

@@ -8,12 +8,9 @@ using System.Timers;
 
 namespace NotificationPlugin
 {
-
     class Program
     {
         static HttpClient client = new HttpClient(); //initializing client
-
-        static int flag = 0;
 
         static void ShowNotifications(List<Notification> notifications)
         {
@@ -21,10 +18,9 @@ namespace NotificationPlugin
             {
                 Console.WriteLine($"Type: {ntf.tip}\tMessage: " +
                 $"{ntf.message}\tScope: {ntf.scope}");
-            }
-          
+            }      
         }
-
+        
         static async Task<List<Notification>> GetNotificationsAsync(string path)
         {
             List<Notification> notifications = null;
@@ -38,41 +34,35 @@ namespace NotificationPlugin
 
         static void Main(string[] args)
         {
-          
+            string id;
+            Console.Write("Enter device id - ");
+            id = Console.ReadLine();
+            int deviceId = int.Parse(id);
+
+            client.BaseAddress = new Uri("http://localhost:25586/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
             while (true)
             {
-                Thread.Sleep(10 * 1000);
+                Thread.Sleep(5 * 1000);
                 Console.WriteLine("*** pulling new notifications *** ");
-                RunAsync().GetAwaiter().GetResult();
-                flag = 1;
+                RunAsync(deviceId).GetAwaiter().GetResult();
             }
-
-
         }
 
-        static async Task RunAsync()
+        static async Task RunAsync(int deviceId)
         {
-
-            if (flag == 0) {
-                client.BaseAddress = new Uri("http://localhost:25586/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
-            }
-
-         
-
             try
-            { 
-               
-                List<Notification> notifications = await GetNotificationsAsync("api/device/notifications/1");
+            {              
+                List<Notification> notifications = await GetNotificationsAsync("api/device/notifications/" + deviceId);
                 ShowNotifications(notifications);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
-
         }
     }
 }

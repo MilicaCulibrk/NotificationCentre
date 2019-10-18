@@ -18,13 +18,10 @@ namespace NotificationHub
         public List<Device> devices;
         public void addNotificationToDevice(Notification notification, int id)
         {
-
-
             Device device;
             
             using (context = new NotificationCentreContext())
-            {
-          
+            {       
                 device = context.Devices.First(u => u.DeviceId.Equals(id));
                 context.NotificationDevices.Add(new NotificationDevice { notification = notification, device = device});
                 context.Notifications.Add(notification);
@@ -34,10 +31,9 @@ namespace NotificationHub
 
         public void addNotificationToGroup(Notification notification, int id)
         {
-
             Group group;
 
-            using (context = new NotificationCentreContext())
+            using (context = new NotificationCentreContext())       
             {
                 var devices = context.Devices
                   .Where(x => x.Group.GroupId == id);
@@ -47,13 +43,6 @@ namespace NotificationHub
                     context.NotificationDevices.Add(new NotificationDevice { notification = notification, device = d });
                 }
 
-                /* devices = context.Devices.(u => u.Group.GroupId.Equals(id)).ToList();
-
-                 foreach(Device d in devices)
-                 {
-                     context.NotificationDevices.Add(new NotificationDevice { notification = notification, device = d });
-                 }*/
-
                 context.Notifications.Add(notification);
                 context.SaveChanges();
             }
@@ -62,15 +51,10 @@ namespace NotificationHub
 
         public List<Notification> ListNotifications()
         {
-            
             using (context = new NotificationCentreContext())
             {
-
                 notifications = context.Notifications.Include(a => a.NotificationDevices).ToList();
-
-
             }
-
             return notifications;
         }
 
@@ -91,8 +75,6 @@ namespace NotificationHub
             {
                 return notification;
             }
-
-
         }
 
         //update notification
@@ -103,8 +85,6 @@ namespace NotificationHub
             using (context = new NotificationCentreContext())
             {
                 ntf = context.Notifications.First(u => u.NotificationId.Equals(id));
-
-         
                 ntf.Tip = notification.Tip;
                 ntf.Message = notification.Message;
                 notification.Scope = notification.Scope;
@@ -117,15 +97,10 @@ namespace NotificationHub
         {
             using (context = new NotificationCentreContext())
             {
-              
-
-                var nds = context.NotificationDevices
+                 var nds = context.NotificationDevices
                 .Where(x => x.NotificationId == id);
-
                 
-               context.NotificationDevices.RemoveRange(nds);
-   
-         
+                context.NotificationDevices.RemoveRange(nds);
                 context.Remove(context.Notifications.Single(a => a.NotificationId.Equals(id)));
                 context.SaveChanges();
             }
@@ -136,10 +111,7 @@ namespace NotificationHub
         {
             using (context = new NotificationCentreContext())
             {
-
-
                 context.Remove(context.NotificationDevices.Single(a => a.NotificationId.Equals(idn) && a.DeviceId.Equals(idd)));
-       
                 context.SaveChanges();
             }
         }
@@ -149,10 +121,7 @@ namespace NotificationHub
         {
             using (context = new NotificationCentreContext())
             {
-
-
                 context.Remove(context.NotificationDevices.Single(a => a.DeviceId.Equals(idd)));
-
                 context.SaveChanges();
             }
         }
@@ -163,20 +132,11 @@ namespace NotificationHub
             using (context = new NotificationCentreContext())
             {
                 var nds = context.NotificationDevices
-              .Where(x => x.device.Group.GroupId == idg);
-
-
+               .Where(x => x.device.Group.GroupId == idg);
+ 
                 context.NotificationDevices.RemoveRange(nds);
-
-
-
-                //context.Remove(context.NotificationDevices.Single(a => a.DeviceId.Equals(idd)));
-
                 context.SaveChanges();
             }
         }
-
-
     }
-
 }
